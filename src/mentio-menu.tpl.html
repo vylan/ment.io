@@ -1,16 +1,54 @@
 <style>
-.scrollable-menu {
+.mention-members {
     height: auto;
     max-height: 300px;
-    overflow: auto;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    color: #2d2d2d;
+    background-color: #fff;
+    width: 170px;
 }
 
-.menu-highlighted {
-    font-weight: bold;
+.mention-member {
+    position: relative;
+    display: block;
+    list-style: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.mention-member.active {
+    background-color: #eee;
+}
+
+.mention-member:hover {
+    background-color: #eee;
+}
+
+.mention-member-detail {
+    line-height: 26px;
+}
+
+.mention-avatar {
+    float: left;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+.mention-member-name {
+    width: 130px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 8px;
+    line-height: 24px;
 }
 </style>
-<ul class="dropdown-menu scrollable-menu" style="display:block">
-    <li mentio-menu-item="item" ng-repeat="item in items track by $index">
-        <a class="text-primary" ng-bind-html="item.label | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></a>
+<ul class="mention-members scrollable-menu" style="display:block">
+    <li class="mention-member" mentio-menu-item="item" ng-repeat="item in items track by $index">
+      <img class="mention-avatar" ng-src="{{item.avatar}}">
+      <div class="mention-member-name" ng-bind-html="item.remarkInGroup || item.remark || item.name | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></div>
     </li>
 </ul>
